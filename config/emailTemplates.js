@@ -1,0 +1,1 @@
+export const EMAIL_VERIFY_TEMPLATES = 'your code '
