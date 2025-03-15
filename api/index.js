@@ -12,8 +12,35 @@ const port = process.env.PORT || 4000;
 // Connect to MongoDB
 connectDB();
 
+// Define allowed origins
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://mern-auth-client-omega.vercel.app',
+  'https://mern-auth-drab-two.vercel.app',
+  'https://mern-auth-client-81ifaaheb-hirushafernando121gmailcoms-projects.vercel.app',
+  'https://mern-auth-client-536auxtb4-hirushafernando121gmailcoms-projects.vercel.app'
+];
+
+// CORS configuration
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true, // Allow cookies and credentials
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  })
+);
+
 // Middleware
-app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
@@ -37,14 +64,8 @@ app.get('/api/debug', (req, res) => {
     message: 'Server is running',
     env: process.env.NODE_ENV,
     cors: {
-      allowedOrigins: [
-        'http://localhost:5173',
-        'https://mern-auth-client-omega.vercel.app/',
-        'https://mern-auth-drab-two.vercel.app',
-        'https://mern-auth-client-81ifaaheb-hirushafernando121gmailcoms-projects.vercel.app',
-        'https://mern-auth-server-brown.vercel.app/'
-      ]
-    }
+      allowedOrigins,
+    },
   });
 });
 
