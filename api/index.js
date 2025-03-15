@@ -41,7 +41,8 @@ app.get('/api/debug', (req, res) => {
         'http://localhost:5173',
         'https://mern-auth-client-omega.vercel.app/',
         'https://mern-auth-drab-two.vercel.app',
-        'https://mern-auth-client-81ifaaheb-hirushafernando121gmailcoms-projects.vercel.app'
+        'https://mern-auth-client-81ifaaheb-hirushafernando121gmailcoms-projects.vercel.app',
+        'https://mern-auth-server-brown.vercel.app/'
       ]
     }
   });
