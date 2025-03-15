@@ -64,7 +64,9 @@ app.use((req, res, next) => {
   next();
 });
 
-
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Server is running' });
+});
 
 app.get('/api/debug', (req, res) => {
   res.json({
